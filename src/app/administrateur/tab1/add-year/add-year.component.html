@@ -1,0 +1,29 @@
+<ion-header >
+  <ion-toolbar color="success">
+    <ion-title >Annee scolaire</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="submit(f)"  #f="ngForm">
+    <ion-item >
+      <ion-input placeholder="Nom de l'annee scolaire" type="text" name="name" id="name" ngModel required></ion-input>
+    </ion-item><br>
+
+      <ion-item >  
+        <ion-label>Date de debut</ion-label>
+        <ion-input  type="date" name="begin" id="begin" ngModel required></ion-input>
+      </ion-item><br>
+
+
+      <ion-item >
+        <ion-label>Date de fin</ion-label>
+        <ion-input  type="date" name="end" id="end" ngModel required></ion-input>
+      </ion-item><br>
+
+    <ion-item lines="none">
+      <ion-button slot="end" type="button" (click)="dismiss()" color="danger" shape="round" >Annuler</ion-button>
+      <ion-button slot="end" type="submit" [disabled]="f.invalid" color="success" shape="round" >Creer</ion-button>
+    </ion-item>
+  </form>
+</ion-content>

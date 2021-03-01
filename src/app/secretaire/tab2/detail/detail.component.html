@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-item lines="none" color="success">
+      <ion-button fill="clear" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+      <ion-title >
+        Notes a valider
+      </ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-card>
+      <ion-card-content>
+        <ion-row>
+          <ion-col class="col21"><h2>N°</h2></ion-col>
+          <ion-col class="col21"><h2>Anonymats</h2></ion-col>
+          <ion-col class="col21"><h2>Nom et<br> prenom</h2></ion-col>
+          <ion-col class="col21"><h2>Note</h2></ion-col>
+        </ion-row>
+        <ion-row *ngFor="let tab of tampNotes; let a = index">
+            <ion-col class="col2">{{a + 1}}</ion-col>
+            <ion-col  class="col2">{{tab.code}}</ion-col>
+            <ion-col  class="col2">{{tab.studentName}}</ion-col>
+            <ion-col  class="col2">{{tab.note}}</ion-col>            
+        </ion-row><br>
+        <ion-item lines="none">
+          <ion-button slot="end" expand="block" color="danger" (click)="dismiss()">Annuler</ion-button>
+          <ion-button slot="end" expand="block" color="success" (click)="saveNotes()">Valider</ion-button>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

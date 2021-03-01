@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-item lines="none" color="success">
+      <ion-buttons>
+        <ion-menu-button menu="first"></ion-menu-button>
+      </ion-buttons>
+      <ion-title >
+        Faire des ajouts
+      </ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="menu">
+    <ion-button expand="block" (click)="addYear()">Creer une Annee Scolaire</ion-button>
+    <ion-button expand="block" (click)="addUser()">Ajouter un Utilisateur</ion-button>
+    <ion-button expand="block" (click)="addStudent()">Ajouter un Etudiant</ion-button>
+    <ion-button expand="block" (click)="addBranch()">Ajouter une Filiere</ion-button>
+    <ion-button expand="block" (click)="addTopic()">Ajouter une Matiere</ion-button>
+  </div>
+
+
+</ion-content>

@@ -1,0 +1,36 @@
+.menu
+{
+    ion-button
+    {
+        margin: 5%;
+    }
+}
+
+ion-col
+{
+    border: 1px solid black;
+    width: 40px;
+}
+
+.col1
+{
+    text-align: center;
+    font-size: 0.5rem;
+    width: 20px;
+}
+
+.col2
+{
+    text-align: center;
+    width: 80px;
+}
+
+.echec
+{
+    color: red;
+}
+
+.success
+{
+    color: #2dd36f;
+}

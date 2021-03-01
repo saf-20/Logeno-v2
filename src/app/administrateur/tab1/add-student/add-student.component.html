@@ -1,0 +1,210 @@
+<ion-content>
+<div *ngIf="this.adder.test === 1">
+  <ion-header >
+    <ion-toolbar color="success">
+      <ion-title >Etudiant</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+    <form (ngSubmit)="submit(f)"  #f="ngForm">
+      <ion-item >
+        <br>
+        <ion-label position="floating">Matricule</ion-label>
+        <ion-input placeholder="Matricule" type="text" name="matricule" id="matricule" ngModel required></ion-input>
+      </ion-item><br>
+  
+      <ion-item >
+        <ion-label position="floating">Nom</ion-label>
+        <ion-input placeholder="Nom de l'etudiant" type="text" name="name" id="name" ngModel required></ion-input>
+      </ion-item><br>
+      <ion-item >
+        <ion-label position="floating">Prenom</ion-label>
+        <ion-input placeholder="Prenom de l'etudiant" type="text" name="surname" id="surname" ngModel required></ion-input>
+      </ion-item><br>
+  
+      <ion-item >
+        <ion-label position="floating">Date de naissance</ion-label>
+        <ion-input placeholder="Date de naissance" type="date" name="birthDate" id="birthDate" ngModel required></ion-input>
+      </ion-item><br>
+  
+      <ion-item >
+        <ion-label position="floating">Lieu</ion-label>
+        <ion-input placeholder="Lieu de naissance" type="text" name="place" id="place" ngModel required></ion-input>
+      </ion-item><br>
+  
+  
+      <ion-item >
+        <ion-label position="floating">Niveau</ion-label>
+        <ion-input placeholder="Niveau de l'etudiant" type="number" name="level" id="level" ngModel required></ion-input>
+      </ion-item><br>
+  
+      <ion-item >
+        <ion-label position="floating">Cycle</ion-label>
+        <ion-select name="cycle" ngModel required>
+          <ion-select-option value="BTS">BTS</ion-select-option>
+          <ion-select-option value="LICENSE">LICENSE</ion-select-option>
+          <ion-select-option value="MASTER">MASTER</ion-select-option>
+        </ion-select>
+      </ion-item><br>
+  
+      <ion-item>
+        <ion-label position="floating">Filiere</ion-label>
+        <ion-select name="branch" ngModel required>
+          <div *ngFor="let fil of branchs">
+            <ion-select-option value={{fil.code}}>{{fil.branchName}}</ion-select-option>
+          </div>
+        </ion-select>  
+      </ion-item><br>
+  
+      <ion-item >
+        <ion-label position="floating">Option</ion-label>
+        <ion-input placeholder="Option de la filiere" type="text" name="option" id="option" ngModel required></ion-input>
+      </ion-item><br>
+
+      <ion-item >
+        <ion-label position="floating">Mot de passe</ion-label>
+        <ion-input placeholder="Entrez le mot de passe" type="text" name="password" id="password" ngModel required></ion-input>
+      </ion-item><br>
+  
+  
+      <ion-item lines="none">
+        <ion-button slot="end" type="button" (click)="dismiss()" color="danger" shape="round" >Annuler</ion-button>
+        <ion-button slot="end" type="submit" [disabled]="f.invalid" color="success" shape="round" >Ajouter</ion-button>
+      </ion-item>
+    </form>
+  </div>
+
+  
+  <div *ngIf="this.adder.test === 4">
+    <ion-header >
+      <ion-toolbar color="success">
+        <ion-title >Utilisateur</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    
+      <form (ngSubmit)="submit(f)"  #f="ngForm">
+        <ion-item >
+          <br>
+          <ion-label position="floating">Matricule</ion-label>
+          <ion-input placeholder="Matricule" type="text" name="matricule" id="matricule" ngModel required></ion-input>
+        </ion-item><br>
+    
+        <ion-item >
+          <ion-label position="floating">Nom</ion-label>
+          <ion-input placeholder="Nom de l'etudiant" type="text" name="name" id="name" ngModel required></ion-input>
+        </ion-item><br>
+        <ion-item >
+          <ion-label position="floating">Prenom</ion-label>
+          <ion-input placeholder="Prenom de l'etudiant" type="text" name="surname" id="surname" ngModel required></ion-input>
+        </ion-item><br>
+
+        <ion-item >
+          <ion-label position="floating">Statut</ion-label>
+          <ion-select name="statut" ngModel required>
+            <ion-select-option value="enseignant">Enseignant</ion-select-option>
+            <ion-select-option value="secretaire">Secretaire</ion-select-option>
+            <ion-select-option value="sa">Secretaire Academique</ion-select-option>
+          </ion-select>
+        </ion-item><br>
+    
+        <ion-item >
+          <ion-label position="floating">Mot de passe</ion-label>
+          <ion-input placeholder="Entrez le mot de passe" type="text" name="password" id="password" ngModel required></ion-input>
+        </ion-item><br>
+    
+    
+        <ion-item lines="none">
+          <ion-button slot="end" type="button" (click)="dismiss()" color="danger" shape="round" >Annuler</ion-button>
+          <ion-button slot="end" type="submit" [disabled]="f.invalid" color="success" shape="round" >Ajouter</ion-button>
+        </ion-item>
+      </form>
+    </div>
+
+    
+  <div *ngIf="this.adder.test === 2">
+    
+    <ion-header >
+      <ion-toolbar color="success">
+        <ion-title >Filiere</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    
+    
+    <ion-card-content>
+      <form (ngSubmit)="submit(f)"  #f="ngForm">
+        <ion-item>
+          <ion-label position="floating">Code filiere</ion-label>
+          <ion-input type="text" name="code" id="code" ngModel required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Libelle </ion-label>
+          <ion-input type="text" name="libelle" id="libelle" ngModel required></ion-input>
+        </ion-item>
+        <br>
+        <div>
+        <ion-button  [disabled]="f.invalid" type="submit" expand="block" color="success">Ajouter</ion-button>
+      </div>
+    </form>
+  </ion-card-content>
+</div>
+
+<div *ngIf="this.adder.test === 3">
+  
+  <ion-header >
+    <ion-toolbar color="success">
+      <ion-title >Matiere</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-card-content>
+    <form (ngSubmit)="submit(f)"  #f="ngForm">
+      <ion-item>
+        <ion-label position="floating">Code Matiere</ion-label>
+        <ion-input type="text" name="code" id="code" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Libelle Matiere</ion-label>
+        <ion-input type="text" name="libelle" id="libelle" ngModel required></ion-input>
+      </ion-item>
+      
+
+      <ion-item>
+        <ion-label position="stacked">Tpe de la matiere</ion-label>
+        <ion-select name="type" placeholder="" ngModel required>
+          <ion-select-option value=fondamentale>Fondamentale</ion-select-option>
+          <ion-select-option value=spécialisation>Spécialisation</ion-select-option>
+          <ion-select-option value=transversale>Transversale</ion-select-option>
+      </ion-select>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="stacked">Niveau</ion-label>
+        <ion-select name="level" placeholder="Niveau" ngModel required>
+          <ion-select-option value=1>Niveau 1</ion-select-option>
+          <ion-select-option value=2>Niveau 2</ion-select-option>
+          <ion-select-option value=3>Niveau 3</ion-select-option>
+      </ion-select>
+      </ion-item>
+
+      
+      <ion-item>
+        <ion-label position="floating">Professeur</ion-label>
+        <ion-select name="teacher" ngModel required>
+          <div *ngFor="let prof of teachers">
+            <ion-select-option value={{prof.matricule}}>{{prof.userName}} {{prof.surname}}</ion-select-option>
+          </div>
+        </ion-select>  
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="floating">Duree Matiere</ion-label>
+        <ion-input type="number" name="duree" id="duree" ngModel required></ion-input>
+      </ion-item>
+      <br>
+      <div>
+        <ion-button  [disabled]="f.invalid" type="submit" expand="block" color="success">Ajouter</ion-button>
+      </div>
+    </form>
+  </ion-card-content>
+</div>
+</ion-content>

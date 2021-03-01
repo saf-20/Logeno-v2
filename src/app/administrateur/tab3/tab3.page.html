@@ -1,0 +1,119 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-item lines="none" color="success">
+      <ion-buttons>
+        <ion-menu-button menu="first"></ion-menu-button>
+      </ion-buttons>
+      <ion-title >
+        Supprimer
+      </ion-title>
+    </ion-item>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 3</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="plus === 0">
+    <ion-item><label>Selectionner</label></ion-item>
+
+    <div class="menu">
+      <ion-button expand="block" (click)="change(1)">Liste des Enseignants</ion-button>
+      <ion-button expand="block" (click)="change(2)">Liste des Etudiant</ion-button>
+      <ion-button expand="block" (click)="change(3)">Liste des Filiere</ion-button>
+      <ion-button expand="block" (click)="change(4)">Liste des Matiere</ion-button>
+    </div>
+  </div>
+
+  <div *ngIf="plus === 1">
+
+    <ion-item lines="nones"><label class="form-control">Glissez pour supprimer...</label>
+      <ion-button slot="end" color="success" (click)="change(0)">Retour</ion-button>
+    </ion-item>
+
+      <div *ngFor="let tab of teachers">
+          <ion-item-sliding>
+            <ion-item>
+              {{tab.userName}} {{tab.surname}} 
+            </ion-item>
+
+            <ion-item-options >
+              <ion-item-option (click)="drop('Users' ,tab.docId)" side="end" expandable color="danger" >
+                <ion-icon name="trash"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+      </div> 
+  </div>
+
+  <div *ngIf="plus === 2">
+
+    <ion-item lines="nones"><label class="form-control">Glissez pour supprimer...</label>
+      <ion-button slot="end" color="success" (click)="change(0)">Retour</ion-button>
+    </ion-item>
+
+      <div *ngFor="let tab of students">
+          <ion-item-sliding>
+            <ion-item>
+              {{tab.studentName}} {{tab.surname}} 
+            </ion-item>
+
+            <ion-item-options>
+              <ion-item-option side="end" expandable color="danger"(click)="drop('Students' ,tab.docId)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+      </div> 
+  </div>
+
+
+  <div *ngIf="plus === 3">
+
+    <ion-item lines="nones"><label class="form-control">Glissez pour supprimer...</label>
+      <ion-button slot="end" color="success" (click)="change(0)">Retour</ion-button>
+    </ion-item>
+
+      <div *ngFor="let tab of branchs">
+          <ion-item-sliding>
+            <ion-item>
+              {{tab.branchName}} 
+            </ion-item>
+
+            <ion-item-options>
+              <ion-item-option side="end" expandable color="danger" (click)="drop('Branchs' ,tab.docId)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+      </div> 
+  </div>
+
+
+  <div *ngIf="plus === 4">
+
+    <ion-item lines="nones"><label class="form-control">Glissez pour supprimer...</label>
+      <ion-button slot="end" color="success" (click)="change(0)">Retour</ion-button>
+    </ion-item>
+
+      <div *ngFor="let tab of topics">
+          <ion-item-sliding>
+            <ion-item>
+              {{tab.topicName}} 
+            </ion-item>
+
+            <ion-item-options>
+              <ion-item-option side="end" expandable color="danger" (click)="drop('Topics' ,tab.docId)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+      </div> 
+  </div>
+
+</ion-content>

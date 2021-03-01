@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-item lines="none" color="success">
+      <ion-buttons>
+        <ion-menu-button menu="first"></ion-menu-button>
+      </ion-buttons>
+      <ion-title >
+        Valider les notes
+      </ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+<div *ngIf="plus === 0">
+  <marquee><h3>Liste des notes à valider</h3></marquee>
+  <ion-item>
+    <div>
+      <p>Cliquez pour verifier et valider la note</p>
+    </div>
+  </ion-item>
+  
+  <div class="menu" *ngFor="let tab of viewerNotes">
+    <ion-card button (click)="trieur(tab)">
+      <ion-card-content>
+        <ion-label>
+          <ion-item >
+            <h4>Enseignant:</h4>
+            <ion-badge slot="end">{{tab.teacherName}}</ion-badge>
+          </ion-item>
+          <ion-item>
+            <h4>Filiere:</h4>
+            <h4 slot="end">{{tab.branchName}}</h4>
+          </ion-item>
+          <ion-item >
+            <h4>Matiere:</h4>
+            <h4 slot="end"> {{tab.topicName}}</h4>
+          </ion-item>
+        </ion-label>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</div>
+
+</ion-content>

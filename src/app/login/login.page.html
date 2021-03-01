@@ -1,0 +1,29 @@
+<ion-content>
+  <div class="header">
+      <img class="image" src="../../assets/Screenshot 2020-12-06 215201.png">
+      <div class="text">
+        <h6>Connectez vous a votre compte!</h6>
+      </div>
+  </div>
+
+  <div class="body">
+    <div class="box">
+      <form (ngSubmit) ="connexion(f)" #f="ngForm" >
+        <ion-item>
+            <ion-input type="text" placeholder="Matricule" id="matricule" name="matricule" ngModel required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="password" name="password" placeholder="Mot de passe" id="password" ngModel required ></ion-input>
+        </ion-item><br>
+
+        <div>
+          <ion-button shape="round" [disabled]="f.invalid" type="submit" fill="outline" expand="block" color="primary">Connexion</ion-button>
+        </div>
+
+      </form><br>
+      <div>
+        <ion-button shape="round"  type="button" expand="block" color="success" >Inscription</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

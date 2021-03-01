@@ -1,0 +1,83 @@
+<ion-header *ngIf="etude.plus2 === 1">
+  <ion-toolbar color="primary">
+    <ion-item lines="none" color="primary">
+      <ion-title>Etudiant</ion-title>
+    </ion-item>
+    <ion-searchbar placeholder="Rechercher un etudiant" (ionChange)="filter1($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-header *ngIf="etude.plus2 === 2">
+  <ion-toolbar color="primary">
+    <ion-item lines="none" color="primary">
+      <ion-title>Filiere</ion-title>
+    </ion-item>
+    <ion-searchbar placeholder="Rechercher une filiere" (ionChange)="filter2($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header *ngIf="etude.plus2 === 3">
+  <ion-toolbar color="primary">
+    <ion-item lines="none" color="primary">
+      <ion-title>Matiere</ion-title>
+    </ion-item>
+    <ion-searchbar placeholder="Rechercher une matiere" (ionChange)="filter3($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header *ngIf="etude.plus2 === 4">
+  <ion-toolbar color="primary">
+    <ion-item lines="none" color="primary">
+      <ion-title>Enseignants</ion-title>
+    </ion-item>
+    <ion-searchbar placeholder="Rechercher un enseignant" (ionChange)="filter4($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header *ngIf="etude.plus2 === 5">
+  <ion-toolbar color="primary">
+    <ion-item lines="none" color="primary">
+      <ion-title>Utilisateur</ion-title>
+    </ion-item>
+    <ion-searchbar placeholder="Rechercher une matiere" (ionChange)="filter5($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <div *ngIf="etude.plus2 === 1">
+    <ion-card *ngFor="let etent of valeurs">
+      <ion-card-content (click)="selectNote(etent.matricule)">{{etent.studentName |uppercase}} {{etent.surname |uppercase}}</ion-card-content>
+    </ion-card>
+  </div>
+
+
+  <div *ngIf="etude.plus2 === 5">
+    <ion-card *ngFor="let etent of valeurs">
+      <ion-card-content (click)="selectNote(etent.matricule)">{{etent.userName |uppercase}} {{etent.surname |uppercase}}</ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="etude.plus2 === 4">
+    <ion-card *ngFor="let etent of valeurs">
+      <ion-card-content (click)="selectNote(etent.matricule)">{{etent.teacherName |uppercase}} {{etent.surname |uppercase}}</ion-card-content>
+    </ion-card>
+  </div>
+
+
+  <div *ngIf="etude.plus2 === 2">
+    <ion-card *ngFor="let etent of valeurs">
+      <ion-card-content (click)="selectNote(etent.code)">{{etent.branchName |uppercase}}</ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="etude.plus2 === 3">
+    <ion-card *ngFor="let etent of valeurs">
+      <ion-card-content (click)="selectNote(etent.code)">{{etent.topicName |uppercase}}</ion-card-content>
+    </ion-card>
+  </div>
+
+  
+</ion-content>

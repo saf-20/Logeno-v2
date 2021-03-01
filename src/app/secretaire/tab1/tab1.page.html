@@ -1,0 +1,106 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-item lines="none" color="success">
+      <ion-buttons>
+        <ion-menu-button menu="first"></ion-menu-button>
+      </ion-buttons>
+      <ion-title >
+        Generer les Anonymats
+      </ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngIf="plus === 0">
+    <ion-card-header>Formulaire</ion-card-header>
+    <ion-card-content>
+      <form (ngSubmit)="generer(f)"  #f="ngForm">
+        <ion-item>
+          <ion-label position="stacked">Examen</ion-label>
+          <ion-select name="exam" placeholder="Examen" ngModel required>
+            <ion-select-option value="CC1">Control Continu 1</ion-select-option>
+            <ion-select-option value="SN1">Session Normal 1</ion-select-option>
+            <ion-select-option value="CC2">Control Continu 2</ion-select-option>
+            <ion-select-option value="SN2">Session Normal 2</ion-select-option>
+            <ion-select-option value="RR">Rattrappage</ion-select-option>
+        </ion-select>
+        </ion-item>
+
+        <!-- <ion-item>
+          <ion-label position="stacked">Niveau</ion-label>
+          <ion-select name="level" placeholder="Niveau" ngModel required>
+            <ion-select-option value=1>Niveau 1</ion-select-option>
+            <ion-select-option value=2>Niveau 2</ion-select-option>
+            <ion-select-option value=3>Niveau 3</ion-select-option>
+        </ion-select>
+        </ion-item> -->
+
+        <ion-item button (click)="selectThing(2)">
+            Filiere
+            <ion-label slot="end" *ngIf="bran === 0">{{branch.branchName}}</ion-label>
+            <ion-badge slot="end" *ngIf="bran === 1">{{branch.branchName}}</ion-badge>
+        </ion-item>
+
+        <ion-item button (click)="selectThing(4)">
+          Enseignant
+          <ion-label slot="end" *ngIf="ens === 0">{{teacher.userName}} {{teacher.surname}}</ion-label>
+          <ion-badge slot="end" *ngIf="ens === 1">{{teacher.userName}} {{teacher.surname}}</ion-badge>
+        </ion-item>
+
+        <ion-item button (click)="selectThing(3)">
+          Matiere
+          <ion-label slot="end" *ngIf="top === 0">{{topic.topicName}}</ion-label>
+          <ion-badge slot="end" *ngIf="top === 1">{{topic.topicName}}</ion-badge>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-button  [disabled]="f.invalid" type="submit" slot="end" expand="block" color="success">Generer</ion-button>
+      </ion-item>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="plus === 1">
+    <ion-card-header>
+      <ion-item lines="none">
+        <ion-label>Enseignant:</ion-label>
+        <ion-badge slot="end">{{teacher.userName}} {{teacher.surname}}</ion-badge>
+      </ion-item>
+      
+      <ion-item lines="none">
+        <ion-label>Unite:</ion-label>
+        <ion-badge slot="end">{{topic.topicName}}</ion-badge>
+      </ion-item>
+
+
+      <ion-item lines="none">
+        <ion-label>Filiere:</ion-label>
+        <ion-badge slot="end">{{branch.branchName}}</ion-badge>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>Examen:</ion-label>
+        <ion-badge slot="end">{{tampNonames[0].examName}}</ion-badge>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-row>
+        <ion-col class="col1"><h2>Anonymats</h2></ion-col>
+        <ion-col class="col2"><h2>Nom et prenoms de l'etudiant</h2></ion-col>
+      </ion-row>
+      <div *ngFor="let note of tampNonames">
+        <ion-row>
+          <ion-col class="col1">{{note.code}}</ion-col>
+          <ion-col class="col2">{{note.studentName}}</ion-col>
+        </ion-row>
+      </div>
+    </ion-card-content>
+
+    <ion-item lines="none">
+      <ion-button slot="end" expand="block" color="danger" (click)="change()">Annuler</ion-button>
+      <ion-button slot="end" expand="block" color="success" (click)="saveNoname()">Enregistrer</ion-button>
+    </ion-item>
+  </ion-card>
+</ion-content>

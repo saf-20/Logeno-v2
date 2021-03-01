@@ -1,3 +1,58 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="first" contentId="main">
+    <div class="menu-tete">
+    </div>
+    <div class="content-tete">
+
+      <ion-avatar>
+        <ion-img
+          ionImgViewer 
+          title="Photo de profil" 
+          scheme="white" 
+          text="Alex Kabe Kabe"  
+          src="../assets/téléchargement (3).png">
+        </ion-img>
+      </ion-avatar>
+      <ion-label>
+        <h2>Alex Kabe Kabe</h2>
+        <p>Developpeur</p>
+      </ion-label>       
+    </div>
+
+  <ion-content>
+    <ion-list class="menu-item">
+      
+      
+        <ion-item button> 
+          <ion-icon name="moon" slot="start"></ion-icon>
+            <ion-label>Mode nuit</ion-label>
+          <ion-toggle (ngModel)="darkMode" (ionChange)="darcko()"></ion-toggle>
+        </ion-item>
+
+        <ion-menu-toggle >
+          <ion-item  button (click)="synchroniser()" routerDirection="forward">
+            <ion-icon name="refresh-sharp" slot="start"></ion-icon>
+              <ion-label>Synchronisation</ion-label>
+            </ion-item> 
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item button (click)="param()" routerDirection="forward">
+            <ion-icon name="settings" slot="start"></ion-icon>
+              <ion-label>Parametre</ion-label>
+            </ion-item> 
+        </ion-menu-toggle>
+
+        
+      <ion-menu-toggle>
+        <ion-item class="active" button  (click)="home()">
+          <ion-icon name="log-out" slot="start"></ion-icon>
+          <ion-label >Deconnexion</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

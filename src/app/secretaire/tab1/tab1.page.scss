@@ -1,0 +1,25 @@
+ion-col
+{
+    border: 1px solid black;
+    width: 40px;
+    ion-button{
+        margin-left: -2px;
+        margin-right: -2px;
+        margin-bottom: 0px;
+        height: 60px;
+        ion-icon
+        {
+            font-size: 2em;
+        }
+    }
+}
+
+.col1
+{
+    width: 20px;
+}
+
+.col2
+{
+    width: 80px;
+}

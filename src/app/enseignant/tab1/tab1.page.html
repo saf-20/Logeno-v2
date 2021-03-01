@@ -1,0 +1,107 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-item lines="none" color="success">
+      <ion-buttons>
+        <ion-menu-button menu="first"></ion-menu-button>
+      </ion-buttons>
+      <ion-title >
+        Notes
+      </ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- <div class="menu" *ngIf="plus === 0">
+    <ion-button expand="block" (click)="open(1)">D'un(e) Etudiant(e)</ion-button>
+    <ion-button  expand="block" (click)="open(2)">D'une Filiere</ion-button >
+  </div> -->
+
+  <div *ngIf="plus === 0">
+    <ion-item>
+      <div>
+        <h2>Liste des anonymats à emmarger</h2>
+      </div>
+    </ion-item>
+    
+    <div class="menu" *ngFor="let tab of tampTopics">
+      <ion-button (click)="open(tab)" expand="block">{{tab.topicName}}</ion-button>
+    </div>
+  </div>
+  
+  <ion-card *ngIf="plus === 1">
+    <ion-card-header>
+      <ion-item lines="none">
+        <ion-label>Unite:</ion-label>
+        <ion-badge slot="end">{{tops}}</ion-badge>
+      </ion-item>
+
+
+      <ion-item lines="none">
+        <ion-label>Filiere:</ion-label>
+        <ion-badge slot="end">{{fil}}</ion-badge>
+      </ion-item>
+
+    </ion-card-header>
+
+    <ion-card-content>
+        <ion-row>
+          <ion-col class="col1"><h2>Anonymats</h2></ion-col>
+          <ion-col class="col2"><h2>Note</h2></ion-col>
+          <ion-col class="col2"><h2>Appreciation</h2></ion-col>
+        </ion-row>
+
+        <div *ngFor="let note of viewNotes">
+          <ion-row>
+            <ion-col class="col2">{{note.code}}</ion-col>
+            
+            <ion-col *ngIf="note.note < 10" class="col2"><div class="echec">{{note.note}}</div></ion-col>
+            <ion-col *ngIf="note.note > 9" class="col2"><div class="success">{{note.note}}</div></ion-col>
+
+            <ion-col *ngIf="note.note < 10" class="col2"><div class="echec">Echec</div></ion-col>
+            <ion-col *ngIf="note.note >= 10 && note.note < 12" class="col2"><div class="success">Passable</div></ion-col>
+            <ion-col *ngIf="note.note < 14 && note.note >= 12" class="col2"><div class="success">Assez Bien</div></ion-col>
+            <ion-col *ngIf="note.note >= 14 && note.note < 16" class="col2"><div class="success">Bien</div></ion-col>
+            <ion-col *ngIf="note.note >= 16 && note.note < 18" class="col2"><div class="success">Tres Bien</div></ion-col>
+            <ion-col *ngIf="note.note >= 18" class="col2" ><div class="success">Excellent</div></ion-col>
+          </ion-row>
+        </div>
+
+        <ion-item><h5>Ajouter les notes</h5></ion-item>
+          <div *ngFor="let note of viewer">
+            <form (ngSubmit)="addNote(f, note.code)" #f="ngForm">
+            <ion-row>            
+              <ion-col class="col2">
+                <ion-input type="text" name="code" disabled ngModel>{{note.code}}</ion-input>
+              </ion-col>
+              <ion-col class="col2">
+                <ion-input type="number" max=20 min=0 name="note" ngModel required></ion-input>
+              </ion-col>
+                <ion-col class="col1">
+                  <ion-button type="submit" [disabled]="f.invalid"><ion-icon name="add"></ion-icon></ion-button>
+                </ion-col>
+              </ion-row>
+            </form>
+          </div>
+        
+        <ion-item lines="none">
+          <ion-button slot="end" expand="block" color="danger" (click)="change(0)">Annuler</ion-button>
+          <ion-button slot="end" expand="block" color="success" (click)="saveNotes()">Enregistrer</ion-button>
+        </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <!-- <div *ngIf="plus === 1">
+    <ion-item>
+      <ion-label>D'un(e) Etudiant(e)</ion-label>
+      <ion-button slot="start" (click)="open(0)"><ion-icon name="arrow-back"></ion-icon></ion-button>
+    </ion-item>
+  </div>
+
+  <div *ngIf="plus === 2">
+    <ion-item>
+      <ion-label>D'une filiere</ion-label>
+      <ion-button slot="start" (click)="open(0)"><ion-icon name="arrow-back"></ion-icon></ion-button>
+    </ion-item>
+  </div> -->
+</ion-content>

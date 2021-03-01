@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-item lines="none" color="success">
+      <ion-buttons>
+        <ion-menu-button menu="first"></ion-menu-button>
+      </ion-buttons>
+      <ion-title >
+        Notes
+      </ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-button *ngIf="this.plus === 0" expand="block" (click)="selectStudent()">Consulter les notes d'un etudiant</ion-button>
+  <ion-card *ngIf="this.plus === 1">
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          <h2>{{student.studentName}} {{student.surname}} </h2>
+        </ion-label>
+        <ion-button  (click)="selectStudent()">Modifier</ion-button>
+      </ion-item>
+      <form (ngSubmit)="consulter(f)"  #f="ngForm">
+        <ion-item>
+          <ion-label position="stacked">Annee scolaire</ion-label>
+          <ion-select name="year" placeholder="Annee scolaire" ngModel required>
+            <ion-select-option *ngFor="let year of years" value={{year.code}}>{{year.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button   type="submit" slot="end" expand="block" color="success">Conculter</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
