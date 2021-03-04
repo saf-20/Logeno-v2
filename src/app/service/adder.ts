@@ -18,6 +18,7 @@ export class AdderService{
     topics = [];
     teachers = [];
     notes = [];
+    tampNotes = [];
 
     tables = [
         'Teachers',
@@ -26,7 +27,7 @@ export class AdderService{
         'Branchs',
         'Years',
         'NoNames',
-        'TampNoNames',
+        'TampNotes',
         'Notes',
         'Topics'
     ]
@@ -130,6 +131,13 @@ export class AdderService{
             }
         });
 
+        this.storage.get('TampNotes').then(val => {
+            if (val)
+            {
+                this.tampNotes = val;
+            }
+        });
+
 
         this.storage.get('Notes').then(val => {
             if (val)
@@ -202,15 +210,25 @@ export class AdderService{
                 schoolYear: this.years[this.years.length - 1].code,
                 docId: 0,
             }
-            this.users.push(user);
-            // this.storage.set('Users', this.users);
-            this.sync.setThing(this.users, 'Users', 1, 'Ajout d\'utilisateur reussit');
-            if (user.statut === 'enseignant')
+            if (f.statut === 'enseignant')
             {
-                this.teachers.push(user);
-                this.sync.setThing(this.teachers, 'Teachers', 1, 'Ajout de l\'enseignant avec success!');
+                const teacher = {
+                    matricule: f.matricule,
+                    teacherName: f.name,
+                    surname: f.surname,
+                    statut: f.statut,
+                    password: f.password,
+                    schoolYear: this.years[this.years.length - 1].code,
+                    docId: 0,
+                }
+                this.teachers.push(teacher);
                 // this.storage.set('Teachers', this.teachers);
             }
+            this.users.push(user);
+            // this.storage.set('Users', this.users);
+            this.sync.setThing(this.teachers, 'Teachers', 1, 'Ajout de l\'enseignant avec success!');
+            this.sync.setThing(this.users, 'Users', 0, 'Ajout d\'utilisateur reussit');
+            console.log(user);
         }
 
         else if (this.test === 3)
@@ -249,11 +267,7 @@ export class AdderService{
 
     addNoname(f)
     {
-        for(let tab of f)
-        {
-            this.tampNonames.push(tab);
-        }
-        this.sync.setThing(this.tampNonames, 'TampNoNames', 1, 'Vous avez generer les anonymats avec success');
+        this.sync.setThing(f, 'NoNames', 1, 'Vous avez generer les anonymats avec success');
         // this.storage.set('TampNoNames', this.tampNonames);
 
     }
@@ -262,41 +276,30 @@ export class AdderService{
 
     saveNote(f)
     {
-
-        this.storage.get('NoNames').then(val => {
+        this.storage.get('TampNotes').then(val => {
             if (val)
             {
-                this.nonames = val;
+                this.tampNotes = val;
             }
             else
             {
-                this.nonames = [];
+                this.tampNotes = [];
             }
+            console.log(f);
             for(let tab of f)
             {
-                this.nonames.push(tab);
+                this.tampNotes.push(tab);
             }
-            this.sync.setThing(this.nonames, 'NoNames', 1, 'Vous avez enregistrer les notes avec succes!');
+            this.sync.setThing(this.tampNotes, 'TampNotes', 1, 'Vous avez enregistrer les notes avec succes!');
             // this.storage.set('NoNames', this.nonames);
         });
 
     }
 
 
-    saveTampNoName(f)
-    {
-        for(let tab of f)
-        {
-            this.tampNonames.push(tab);
-        }
-        this.sync.setThing(this.tampNonames, 'TampNoNames', 1, 'Ajout de l\'etudiant avec success!');
-        // this.storage.set('TampNoNames', this.tampNonames);
-    }
-
-
     /* Partie d'enregistrement des notes des etudiants */
 
-    dropNote()
+    dropNoname()
     {
         for (let val of this.lookNotes)
         {
@@ -313,8 +316,8 @@ export class AdderService{
                 topic: val.topic,
                 student: val.student,
                 exam: val.exam,
-                docId: val.docId,
-                note: f.note,
+                docId: 0,
+                note: val.note,
                 schoolYear: val.schoolYear,
                 teacher: val.teacher,
                 branchName: val.branchName,
@@ -323,14 +326,16 @@ export class AdderService{
             }
 
             this.notes.push(note);
-            this.dropNoName(val);
-
+            this.dropThing('NoNames', val.docId, 0, '');
+            // this.dropNoName(val);
+            
         }
 
+        // this.sync.setThing(this.notes, 'Notes', 1,'Enregistrement des notes avec succes!');
+        // this.sync.setThing(this.nonames, 'NoNames',0,'');
+
         // this.storage.set('Notes', this.notes);
-        this.sync.setThing(this.notes, 'Notes', 1,'Enregistrement des notes avec succes!');
         // this.storage.set('NoNames', this.nonames);
-        this.sync.setThing(this.nonames, 'NoNames',0,'');
     }
 
     dropNoName(tab)
@@ -345,14 +350,16 @@ export class AdderService{
 
             a++;
         }
+        console.log(tab)
 
-        this.nonames.splice(b, 1);
+        this.nonames.splice(b, 1);   
+        this.dropThing('NoNames', tab.docId, 0, '');
     }
     
     
-    async dropThing(collection, f)
+    async dropThing(collection, f, bool, message)
     {
-        this.sync.dropData(collection, f);
+        this.sync.dropData(collection, f, bool, message);
     }
 
 }

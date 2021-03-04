@@ -73,6 +73,21 @@ export class Synch{
                 }
             }
         }
+        else{
+            this.firestore.collection(document).get().subscribe(val => {
+                if (val.docs)
+                {
+                    let a = 0;
+                    const va = val.docs;
+                    for (a = va.length; a > 0; a--)
+                    {
+                        let tab;
+                        tab = va[a-1].data();
+                        this.dropData(document, tab.docId, 0, '');
+                    }
+                }
+            });
+        }
 
         if (test)
         {
@@ -94,22 +109,25 @@ export class Synch{
         });
     }
 
-    dropData(collection, docId)
+    dropData(collection, docId, bool , message)
     {
         this.firestore.collection(collection).get().subscribe(val => {
             let a = 0;
-            const va = val.docs;
-            console.log('Drop');
-            console.log(va[0].data())
-            for (a = 0; a < va.length; a++)
+            if (val)
             {
-                let tab;
-                tab = va[a].data();
-                if (tab.docId === docId)
+                const va = val.docs;
+                for (a = 0; a < va.length; a++)
                 {
-                    this.firestore.collection(collection).doc(docId.toString()).delete();
-                    this.getThing(collection);
-                    this.toast.ToastWithOptions('Suppression', 'Vous avez supprimer cet element','bottom' , {duration: 2500, color: 'danger'});
+                    let tab;
+                    tab = va[a].data();
+                    if (tab.docId === docId)
+                    {
+                        this.firestore.collection(collection).doc(docId.toString()).delete();
+                        if (bool === 1)
+                        {
+                            this.toast.ToastWithOptions('Suppression', message,'bottom' , {duration: 2500, color: 'danger'});
+                        }
+                    }
                 }
             }
         });

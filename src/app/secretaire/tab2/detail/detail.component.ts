@@ -26,7 +26,9 @@ export class DetailComponent implements OnInit {
 
   back()
   {
-    this.modal.dismiss()
+    this.adder.lookNotes = [];
+    this.modal.dismiss();
+    this.tampNotes = [];
   }
 
   dismiss()
@@ -44,7 +46,7 @@ export class DetailComponent implements OnInit {
         {
           text: 'Oui',
           handler: () => {
-            this.adder.dropNote();
+            this.adder.lookNotes = [];
             this.back();
           }
         }
@@ -68,7 +70,6 @@ export class DetailComponent implements OnInit {
           text: 'Oui',
           handler: () => {
             this.back1(this.adder.lookNotes);
-            this.adder.lookNotes = [];
           }
         }
       ] 

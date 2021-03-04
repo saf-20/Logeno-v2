@@ -386,7 +386,10 @@ export class PdfService{
             }
         });
 
-        this.table1 = this.rangeTable1(tamNotes);
+        if (this.rangeTable1(tamNotes).length !== 0)
+        {
+            this.table1 = this.rangeTable1(tamNotes);
+        }
         if (this.rangeTable2(tamNotes).length !== 0)
         {
             this.table2 = this.rangeTable2(tamNotes);

@@ -58,6 +58,6 @@ export class Tab3Page {
   drop(collection ,f)
   {
     console.log('Passer')
-    this.adder.dropThing(collection, f);
+    this.adder.dropThing(collection, f, 1, 'Suppression de l\'element ');
   }
 }

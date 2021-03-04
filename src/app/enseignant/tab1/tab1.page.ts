@@ -20,7 +20,7 @@ export class Tab1Page {
   fil = '';
   tops = '';
   branchs = [];
-  tampNoNames = [];
+  noNames = [];
   topics = [];
   tampNames = [];
   tampTopics = [];
@@ -51,10 +51,10 @@ export class Tab1Page {
       }
     });
 
-    this.storage.get('TampNoNames').then(val => {
+    this.storage.get('NoNames').then(val => {
       if (val)
       {
-        this.tampNoNames = val;
+        this.noNames = val;
         this.filtre();
       }
     });
@@ -62,7 +62,7 @@ export class Tab1Page {
 
   filtre()
   {
-    this.tampNames = this.tampNoNames.filter((cour) => {
+    this.tampNames = this.noNames.filter((cour) => {
       if (cour.teacherCode === this.user.matricule)
       {
         return cour;
@@ -104,7 +104,6 @@ export class Tab1Page {
         return cour;
       }
     });
-    console.log(this.viewer);
     this.change(1);
   }
 
@@ -139,7 +138,7 @@ export class Tab1Page {
       code: g,
       note: f.value.note,
       branch: mam.branch,
-      docId: mam.docId,
+      docId: 0,
       exam: mam.exam,
       schoolYear: mam.schoolYear,
       statut: true,
@@ -149,7 +148,6 @@ export class Tab1Page {
     }
 
     this.viewer.splice(b, 1);
-    console.log(note);
     this.viewNotes.push(note);
     f.reset();
   }
@@ -175,12 +173,14 @@ export class Tab1Page {
                 return cour;
               }
             });
-            this.adder.saveNote(this.viewNotes)
-            for (let bat of this.viewNotes)
+            // this.adder.saveNote(this.viewNotes)
+            for (let bag of this.viewNotes)
             {
-              this.dropNote(bat);
+              console.log(bag)
+              this.dropNoname(bag);
             }
-            this.adder.saveTampNoName(this.tampNoNames);
+            this.adder.addNoname(this.noNames);
+            console.log(this.noNames)
             this.change(0);
             this.filtre();
           }
@@ -189,10 +189,10 @@ export class Tab1Page {
       }).then(val => val.present());
   }
 
-  dropNote(f)
+  dropNoname(f)
   {
     let test = false, a = 0 , b = 0;
-    for (let bat of this.tampNoNames)
+    for (let bat of this.noNames)
     {
       if (f.code === bat.code)
       {
@@ -204,7 +204,11 @@ export class Tab1Page {
 
     if (test)
     {
-      this.tampNoNames.splice(b, 1);
+      
+      console.log(this.noNames)
+      console.log('Voici mon tampon')
+      this.noNames.splice(b, 1);
+      console.log(this.noNames)
     }
   }
 }

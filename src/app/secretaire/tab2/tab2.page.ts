@@ -90,7 +90,6 @@ export class Tab2Page {
     {
       if (tab.code !== teach && tab.topic !== top)
       {
-        console.log('Langue');
         top = tab.topic;
         teach = tab.teach;
         for (let val of this.topics)
@@ -142,13 +141,12 @@ export class Tab2Page {
 
   trieur(f)
   {
-    console.log(f);
+    this.viewerNotes2 = [];
     for (let tab of this.nonames)
     {
       const cour = tab;
       if (cour.teacher === f.teacher && cour.exam === f.exam && cour.branch === f.branch && cour.topic === f.topic && cour.schoolYear === f.schoolYear)
       {
-        console.log('Langue 2');
         for (let val of this.topics)
         {
           if (val.code === tab.topic)
@@ -197,7 +195,7 @@ export class Tab2Page {
   }
   async detail(f)
   {
-    const tamp = this.viewerNotes2.filter((cour) => {
+    let tamp = this.viewerNotes2.filter((cour) => {
       if (cour.teacher === f.teacher && cour.exam === f.exam && cour.branch === f.branch && cour.topic === f.topic && cour.schoolYear === f.schoolYear)
       {
         return cour;
@@ -213,9 +211,9 @@ export class Tab2Page {
     let banc = tant.onWillDismiss();
     if ((await banc).data)
     {
-        banc = (await banc).data.base;
-        this.adder.validNote(banc);
-        this.initNoName();
+      banc = (await banc).data.base;
+      this.adder.validNote(banc);
+      this.initNoName();
     }
   }
 

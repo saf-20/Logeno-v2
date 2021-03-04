@@ -81,7 +81,7 @@ export class Tab3Page {
   consulter(f)
   {
     const p = f.value;
-    this.pdf.formatData(this.student.schoolYear, this.student);
+    this.pdf.formatData(p.year, this.student);
     this.plus = 0;
     f.reset();
   }
